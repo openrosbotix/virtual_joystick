@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(572, 250)
+        MainWindow.resize(636, 444)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -100,6 +100,15 @@ class Ui_MainWindow(object):
         self.line.setFrameShape(QtWidgets.QFrame.HLine)
         self.line.setObjectName("line")
         self.verticalLayout.addWidget(self.line)
+        self.gridLayout_3 = QtWidgets.QGridLayout()
+        self.gridLayout_3.setObjectName("gridLayout_3")
+        self.widgetJoyLeft = joyStickWidget(self.centralwidget)
+        self.widgetJoyLeft.setObjectName("widgetJoyLeft")
+        self.gridLayout_3.addWidget(self.widgetJoyLeft, 0, 0, 1, 1)
+        self.widgetJoyRight = joyStickWidget(self.centralwidget)
+        self.widgetJoyRight.setObjectName("widgetJoyRight")
+        self.gridLayout_3.addWidget(self.widgetJoyRight, 0, 1, 1, 1)
+        self.verticalLayout.addLayout(self.gridLayout_3)
         self.gridLayout_2 = QtWidgets.QGridLayout()
         self.gridLayout_2.setObjectName("gridLayout_2")
         self.btn_left_click = QtWidgets.QPushButton(self.centralwidget)
@@ -148,3 +157,4 @@ class Ui_MainWindow(object):
         self.btn_share.setText(_translate("MainWindow", "share"))
         self.btn_ps.setText(_translate("MainWindow", "PS"))
         self.btn_options.setText(_translate("MainWindow", "options"))
+from .joystickwidget import joyStickWidget

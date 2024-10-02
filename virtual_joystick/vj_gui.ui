@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>572</width>
-    <height>250</height>
+    <width>636</width>
+    <height>444</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -194,6 +194,16 @@
      </widget>
     </item>
     <item>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="0" column="0">
+       <widget class="joyStickWidget" name="widgetJoyLeft" native="true"/>
+      </item>
+      <item row="0" column="1">
+       <widget class="joyStickWidget" name="widgetJoyRight" native="true"/>
+      </item>
+     </layout>
+    </item>
+    <item>
      <layout class="QGridLayout" name="gridLayout_2">
       <item row="0" column="0">
        <widget class="QPushButton" name="btn_left_click">
@@ -243,6 +253,14 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>joyStickWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">.joystickwidget</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

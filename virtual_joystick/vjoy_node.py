@@ -3,8 +3,8 @@ from rclpy.node import Node
 
 from sensor_msgs.msg import Joy
 from std_msgs.msg import Header
-#from PyQt5 import QtGui
 
+from math import sin, cos, radians, pi
 
 class virtualJoystick(Node):
 
@@ -64,7 +64,7 @@ class virtualJoystick(Node):
         self.ui.btn_touch.pressed.connect(self.button_touch_press_callback)
         self.ui.btn_touch.released.connect(self.button_touch_release_callback)
         
-        
+    # timer callback to publish a message at 10hz    
     def timer_callback(self):
         
         if self.ui.btn_lb.isChecked():
@@ -77,6 +77,7 @@ class virtualJoystick(Node):
         else:
             self.btn_rb = 0
             
+        # prepare ros2 message
         msg = Joy()
         msg_header = Header()
         msg_header.frame_id = "joy"
@@ -98,8 +99,35 @@ class virtualJoystick(Node):
         msg.buttons.append(self.btn_left) # 13 - left
         msg.buttons.append(self.btn_right) # 14 - right
         msg.buttons.append(self.btn_touch) # 15 - touch
+        
+        # left stick
+        y1, x1 = self.point_pos(0,
+                                0,
+                                self.ui.widgetJoyLeft.distance, 
+                                self.ui.widgetJoyLeft.angle)
+        # invert values for left-right
+        msg.axes.append(x1* -1)
+        msg.axes.append(y1)
+        
+        # right stick
+        y2, x2 = self.point_pos(0,
+                                0,
+                                self.ui.widgetJoyRight.distance,
+                                self.ui.widgetJoyRight.angle)
+        # invert values for left-right
+        msg.axes.append(x2 * -1)
+        msg.axes.append(y2)    
+        
+        # axes value for left,right trigger buttons, currently unused
+        msg.axes.append(0)
+        msg.axes.append(0)    
         self.joy_publisher_.publish(msg)
 
+    # calculate joystick position by vector length and angle
+    def point_pos(self, x0, y0, d, theta):
+        theta_rad = pi/2 - radians(theta)
+        return x0 + d*cos(theta_rad), y0 + d*sin(theta_rad)
+        
     def button_cross_press_callback(self):
         self.btn_cross = 1
 
