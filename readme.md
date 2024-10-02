@@ -13,6 +13,8 @@ Use this command to launch the GUI
 ros2 launch virtual_joystick vjoy.launch.py
 ```
 
+To operate the joysticks, just drag one of the circles using your mouse.
+
 ### Special thanks
 I specially want to say thank you sampreets3 for this clear and complete example in how to use Qt and ROS2 together
 [https://github.com/sampreets3/simple_gui/blob/main/simple_gui/gui_ros_node.py](https://github.com/sampreets3/simple_gui/blob/main/simple_gui/gui_ros_node.py)
